@@ -1,0 +1,16 @@
+# 원본 이미지 폴더 (용량이 크므로 제외)
+img/
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyc
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+

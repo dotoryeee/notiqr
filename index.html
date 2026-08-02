@@ -1,0 +1,2758 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>정원🤍혜원 결혼합니다</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Noto+Sans+KR:wght@300;400;500;600&family=Gowun+Batang:wght@400;700&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
+    
+    <!-- Three.js for Ballpit -->
+    <script async src="https://unpkg.com/es-module-shims@1.6.3/dist/es-module-shims.js"></script>
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+            "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+        }
+    }
+    </script>
+    
+    <style>
+        :root {
+            --color-bg: #0f0f23;
+            --color-primary: #ff6b6b;
+            --color-secondary: #4ecdc4;
+            --color-accent: #ffe66d;
+            --color-purple: #a855f7;
+            --color-pink: #f472b6;
+            --color-cyan: #22d3ee;
+            --color-text: #ffffff;
+            --color-text-light: rgba(255,255,255,0.85);
+            --color-text-muted: rgba(255,255,255,0.6);
+            --font-display: 'Playfair Display', serif;
+            --font-korean: 'Gowun Batang', serif;
+            --font-sans: 'Noto Sans KR', sans-serif;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { 
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+            width: 100%;
+            max-width: 100%;
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        
+        body {
+            font-family: var(--font-sans);
+            background: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.8;
+            overflow-x: hidden;
+            width: 100%;
+            max-width: 100%;
+            position: relative;
+        }
+        
+        .container {
+            max-width: 480px;
+            width: 100%;
+            margin: 0 auto;
+            position: relative;
+            padding-top: 100vh; /* Space for fixed hero */
+            overflow-x: hidden;
+        }
+        
+        .section {
+            padding: 80px 35px;
+            position: relative;
+            z-index: 1;
+            background: var(--color-bg);
+        }
+        
+        .section-header { text-align: center; margin-bottom: 40px; }
+        
+        .section-eng-title {
+            font-family: var(--font-display);
+            font-size: 0.75rem;
+            letter-spacing: 0.3em;
+            background: linear-gradient(90deg, var(--color-primary), var(--color-accent), var(--color-secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+        
+        .section-title {
+            font-family: var(--font-korean);
+            font-size: 1.2rem;
+            font-weight: 400;
+            color: var(--color-text);
+        }
+        
+        /* ========================================
+           HERO with BALLPIT
+        ======================================== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 60px 30px;
+            position: fixed;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 480px;
+            overflow: hidden;
+            background: var(--color-bg);
+            z-index: 0;
+            box-sizing: border-box;
+        }
+        
+        #ballpit-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            background: #0f0f23; /* Same as --color-bg to cover galaxy */
+        }
+        
+        #ballpit-container canvas {
+            width: 100% !important;
+            height: 100% !important;
+            display: block;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            transform: translateY(-40px);
+        }
+        
+        .hero-eng-text {
+            font-family: var(--font-display);
+            font-size: 0.77rem;
+            letter-spacing: 0.4em;
+            color: var(--color-text);
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+        }
+        
+        .hero-photo {
+            width: 260px;
+            height: 350px;
+            margin: 0 auto 30px;
+            border-radius: 180px 180px 20px 20px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+            border: 3px solid rgba(255,255,255,0.2);
+            background: #222;
+        }
+        
+        .hero-photo img {
+            width: 100%;
+            max-width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .hero-names {
+            font-family: var(--font-korean);
+            font-size: 1.5rem;
+            color: var(--color-text);
+            margin-bottom: 8px;
+        }
+        
+        .hero-names .heart {
+            color: var(--color-primary);
+            margin: 0 8px;
+        }
+        
+        .hero-date {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--color-text);
+            letter-spacing: 0.1em;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+            font-weight: 500;
+        }
+        
+        .scroll-hint {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--color-text-muted);
+            font-size: 0.6rem;
+            letter-spacing: 0.15em;
+            z-index: 10;
+        }
+        
+        .scroll-hint svg {
+            width: 16px;
+            height: 16px;
+            fill: currentColor;
+            display: block;
+            margin: 8px auto 0;
+        }
+        
+        .galaxy-section {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .glass-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 30px 25px;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* ========================================
+           STAR BORDER
+        ======================================== */
+        .star-border-container {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .border-gradient-bottom,
+        .border-gradient-top {
+            position: absolute;
+            left: 0;
+            right: 0;
+            height: 1px;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .border-gradient-bottom {
+            bottom: 0;
+            animation: starBorderBottom linear infinite;
+        }
+        
+        .border-gradient-top {
+            top: 0;
+            animation: starBorderTop linear infinite;
+        }
+        
+        @keyframes starBorderBottom {
+            0% {
+                transform: translateX(-100%);
+            }
+            100% {
+                transform: translateX(100%);
+            }
+        }
+        
+        @keyframes starBorderTop {
+            0% {
+                transform: translateX(100%);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+        
+        .star-border-container .inner-content {
+            position: relative;
+            z-index: 2;
+            padding: 25px 19px;
+        }
+        
+        .star-border-container.glass-card {
+            padding: 0;
+        }
+        
+        /* ========================================
+           INVITATION
+        ======================================== */
+        .invitation { text-align: center; }
+        
+        .invitation-text {
+            font-family: var(--font-korean);
+            font-size: 0.95rem;
+            line-height: 2.4;
+            color: var(--color-text-light);
+            margin-bottom: 50px;
+        }
+        
+        .parents-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .parent-side { 
+            text-align: center;
+            flex: 1;
+            min-width: 0;
+        }
+        
+        .parent-names {
+            font-size: 0.85rem;
+            color: var(--color-text-muted);
+            white-space: nowrap;
+            line-height: 1.4;
+        }
+        
+        .parent-names .child-name {
+            font-family: var(--font-korean);
+            font-size: 1.1rem;
+            color: var(--color-accent);
+            margin-left: 4px;
+        }
+        
+        .parents-divider {
+            width: 100px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--color-primary), transparent);
+        }
+        
+        /* ========================================
+           ABOUT US
+        ======================================== */
+        .about-cards {
+            display: flex;
+            flex-direction: row;
+            gap: 15px;
+            justify-content: center;
+        }
+        
+        .about-card { 
+            text-align: center;
+            flex: 1;
+            max-width: 160px;
+            padding: 0 5px;
+        }
+        
+        .about-photo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 0 auto 10px;
+            border: 2px solid var(--color-text);
+            transition: transform 0.3s ease;
+        }
+        
+        .about-photo:hover {
+            transform: scale(1.1);
+        }
+        
+        .about-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .about-photo:hover img {
+            transform: scale(1.15);
+        }
+        
+        .about-role {
+            font-family: var(--font-display);
+            font-size: 0.6rem;
+            letter-spacing: 0.15em;
+            color: var(--color-cyan);
+            text-transform: uppercase;
+            margin-bottom: 3px;
+        }
+        
+        .about-name {
+            font-family: 'Gowun Batang', serif;
+            font-size: 1rem;
+            color: var(--color-text);
+            margin-bottom: 3px;
+        }
+        
+        .about-info {
+            font-size: 0.7rem;
+            color: var(--color-accent);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            justify-content: center;
+            align-items: center;
+            margin-top: 6px;
+        }
+        
+        /* 신부 카드 분홍색 스타일 */
+        .bride-card .about-role {
+            color: #ff6b9d;
+        }
+        
+        .bride-card .about-info {
+            color: #ff6b9d;
+        }
+        
+        .bride-card .hashtag {
+            background: rgba(255, 158, 200, 0.15);
+            color: #ff6b9d;
+            border: 1px solid rgba(255, 158, 200, 0.3);
+        }
+        
+        .bride-card .hashtag:hover {
+            background: rgba(255, 158, 200, 0.25);
+            border-color: rgba(255, 158, 200, 0.5);
+            box-shadow: 0 2px 8px rgba(255, 158, 200, 0.2);
+        }
+        
+        .hashtag {
+            display: inline-block;
+            padding: 3px 8px;
+            background: rgba(78, 205, 196, 0.15);
+            border: 1px solid rgba(78, 205, 196, 0.3);
+            border-radius: 10px;
+            font-size: 0.6rem;
+            color: var(--color-cyan);
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        
+        .hashtag:hover {
+            background: rgba(78, 205, 196, 0.25);
+            border-color: rgba(78, 205, 196, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 2px 8px rgba(78, 205, 196, 0.2);
+        }
+        
+        .hashtag::before {
+            content: '#';
+            opacity: 0.7;
+            margin-right: 2px;
+        }
+        
+        /* ========================================
+           TIMELINE
+        ======================================== */
+        .timeline-list {
+            padding-left: 25px;
+            border-left: 2px solid #ffe66d;
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding-bottom: 35px;
+            padding-left: 0px;
+        }
+        
+        .timeline-item:last-child { padding-bottom: 0; }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -31px;
+            top: 5px;
+            width: 10px;
+            height: 10px;
+            background: #ffe66d;
+            border-radius: 50%;
+            box-shadow: 0 0 5px #ffe66d;        
+        }
+        
+        .timeline-date {
+            font-size: 0.75rem;
+            color: var(--color-accent);
+            margin-bottom: 5px;
+        }
+        
+        .timeline-title {
+            font-size: 0.9rem;
+            color: var(--color-text);
+            margin-bottom: 5px;
+        }
+        
+        .timeline-desc {
+            font-size: 0.8rem;
+            color: var(--color-text-muted);
+        }
+        
+        /* ========================================
+           INTERVIEW
+        ======================================== */
+        .interview-list {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+        
+        .interview-q {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--color-accent);
+            margin-bottom: 15px;
+        }
+        
+        .interview-answer {
+            margin-bottom: 12px;
+            padding-left: 15px;
+            border-left: 2px solid var(--color-secondary);
+        }
+        
+        .interview-who {
+            font-size: 0.75rem;
+            color: var(--color-cyan);
+            margin-bottom: 5px;
+        }
+        
+        .interview-text {
+            font-size: 0.8rem;
+            color: var(--color-text-light);
+        }
+        
+        /* 신부 관련 핑크색 스타일 */
+        .bride-answer {
+            border-left-color: #ff6b9d !important;
+        }
+        
+        .bride-answer .interview-who {
+            color: #ff6b9d;
+        }
+        
+        /* ========================================
+           CALENDAR
+        ======================================== */
+        .calendar-box { margin-bottom: 25px; }
+        
+        .calendar-month {
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            text-align: center;
+            color: var(--color-accent);
+            margin-bottom: 15px;
+        }
+        
+        .calendar-weekdays {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            text-align: center;
+            margin-bottom: 5px;
+        }
+        
+        .calendar-weekdays span {
+            font-size: 0.7rem;
+            color: var(--color-text-muted);
+            padding: 5px 0;
+        }
+        
+        .calendar-weekdays span:first-child { color: var(--color-primary); }
+        
+        .calendar-days {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            text-align: center;
+            gap: 2px;
+        }
+        
+        .calendar-day {
+            padding: 0;
+            font-size: 0.85rem;
+            color: var(--color-text-light);
+            border-radius: 50%;
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            width: 100%;
+            box-sizing: border-box;
+            line-height: 1;
+        }
+        
+        .calendar-day.empty { color: transparent; }
+        .calendar-day.sunday { color: var(--color-primary); }
+        .calendar-day.wedding {
+            background: var(--color-primary);
+            color: white;
+            font-weight: 600;
+        }
+        
+        .dday-counter {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            text-align: center;
+        }
+        
+        .dday-counter > div {
+            white-space: nowrap;
+        }
+        
+        .dday-value {
+            font-family: var(--font-display);
+            font-size: 1.8rem;
+            color: var(--color-text);
+        }
+        
+        .dday-unit {
+            font-size: 0.65rem;
+            color: rgb(253, 228, 108);
+            white-space: nowrap;
+        }
+        
+        .wedding-info {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: var(--color-text-light);
+        }
+        
+        /* ========================================
+           LOCATION
+        ======================================== */
+        .location-name {
+            font-size: 1.2rem;
+            color: var(--color-text);
+            text-align: center;
+            margin-bottom: 5px;
+        }
+        
+        .location-hall {
+            font-size: 0.85rem;
+            color: var(--color-text);
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        
+        .location-address {
+            font-size: 0.8rem;
+            color: var(--color-text-muted);
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        
+        .location-copy-btn {
+            display: block;
+            margin: 0 auto 20px;
+            background: none;
+            border: none;
+            color: var(--color-accent);
+            font-size: 0.75rem;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+        
+        .map-container {
+            height: 180px;
+            border-radius: 15px;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+        
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+        
+        .map-buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+        
+        .map-btn {
+            flex: 1;
+            padding: 8px 12px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 0.7rem;
+            color: var(--color-text-light);
+            background: rgba(255,255,255,0.05);
+            border-radius: 8px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .map-btn img {
+            width: 24px;
+            height: 24px;
+            object-fit: contain;
+        }
+        
+        .transport-item { margin-bottom: 15px; }
+        
+        .transport-divider {
+            border-bottom: 1px dotted rgba(255,255,255,0.35);
+            margin: 10px 0 14px 0;
+        }
+        
+        .transport-title {
+            font-size: 0.95rem;
+            color: var(--color-text);
+            margin-bottom: 8px;
+        }
+        
+        .transport-detail {
+            font-size: 0.8rem;
+            color: var(--color-text-muted);
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+        
+        .transport-parking-note {
+            font-size: 0.85rem;
+            color: var(--color-primary);
+            margin: 8px 0 2px 0;
+            font-weight: 600;
+        }
+        
+        .transport-parking-summary {
+            font-size: 0.8rem;
+            color: var(--color-text-muted);
+            margin: 0 0 12px 0;
+            line-height: 1.6;
+        }
+        
+        .transport-parking-address {
+            margin-top: 0;
+        }
+        
+        /* ========================================
+           GALLERY
+        ======================================== */
+        .gallery { padding: 80px 0; }
+        .gallery .section-header { padding: 0 35px; }
+        
+        .gallery-grid {
+            display: flex;
+            gap: 15px;
+            padding: 0 15px;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none; /* IE/Edge */
+        }
+        
+        .gallery-grid::-webkit-scrollbar {
+            display: none; /* Chrome/Safari */
+        }
+        
+        .gallery-column {
+            flex: 0 0 46%;
+            max-width: 46%;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            scroll-snap-align: center;
+        }
+        
+        .gallery-item {
+            width: 100%;
+            aspect-ratio: 3 / 4;
+            border-radius: 10px;
+            overflow: hidden;
+            cursor: pointer;
+            position: relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .gallery-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0);
+            transition: background 0.3s ease;
+            z-index: 1;
+            pointer-events: none;
+        }
+        
+        .gallery-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            z-index: 2;
+        }
+        
+        .gallery-item:hover::before {
+            background: rgba(0, 0, 0, 0.3);
+        }
+        
+        .gallery-item img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+            opacity: 1;
+        }
+        
+        @keyframes fadeInImage {
+            from {
+                opacity: 0;
+                transform: scale(1.1);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .gallery-item:active {
+            transform: scale(0.98);
+        }
+        
+        .gallery-item.clicked {
+            animation: itemClick 0.3s ease;
+        }
+        
+        @keyframes itemClick {
+            0% { transform: scale(1.05); }
+            50% { transform: scale(0.95); }
+            100% { transform: scale(1.05); }
+        }
+        
+        /* Lightbox */
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0);
+            z-index: 10000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+            backdrop-filter: blur(0px);
+        }
+        
+        .lightbox.active {
+            opacity: 1;
+            visibility: visible;
+            background: rgba(0,0,0,0.95);
+            backdrop-filter: blur(10px);
+        }
+        
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 85vh;
+            object-fit: contain;
+            transform: scale(0.8);
+            opacity: 0;
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.4s ease;
+        }
+        
+        .lightbox.active .lightbox-content {
+            transform: scale(1);
+            opacity: 1;
+        }
+        
+        .lightbox-content.fade-out {
+            opacity: 0;
+            transform: scale(0.9);
+        }
+        
+        .lightbox-content.fade-in {
+            opacity: 1;
+            transform: scale(1);
+        }
+        
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border: none;
+            border-radius: 50%;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 0.3s ease;
+            z-index: 10001;
+        }
+        
+        .lightbox.active .lightbox-close {
+            opacity: 1;
+            transform: scale(1);
+            transition-delay: 0.2s;
+        }
+        
+        .lightbox-close:hover {
+            background: rgba(255,255,255,0.2);
+            transform: scale(1.1);
+        }
+        
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.1);
+            border: none;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 10001;
+        }
+        
+        .lightbox.active .lightbox-nav {
+            opacity: 1;
+            transition-delay: 0.2s;
+        }
+        
+        .lightbox-nav:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-50%) scale(1.1);
+        }
+        
+        .lightbox-prev { left: 15px; }
+        .lightbox-next { right: 15px; }
+        
+        .lightbox-counter {
+            position: absolute;
+            bottom: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255,255,255,0.6);
+            font-size: 0.85rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .lightbox.active .lightbox-counter {
+            opacity: 1;
+            transition-delay: 0.3s;
+        }
+        
+        .lightbox-counter.updating {
+            animation: counterPulse 0.3s ease;
+        }
+        
+        @keyframes counterPulse {
+            0%, 100% { transform: translateX(-50%) scale(1); }
+            50% { transform: translateX(-50%) scale(1.2); }
+        }
+        
+        /* ========================================
+           INFORMATION
+        ======================================== */
+        .info-item { margin-bottom: 20px; }
+        .info-item:last-child { margin-bottom: 0; }
+        
+        .info-title {
+            font-size: 0.9rem;
+            color: var(--color-text);
+            margin-bottom: 8px;
+        }
+        
+        .info-text {
+            font-size: 0.8rem;
+            color: var(--color-text-muted);
+            line-height: 1.8;
+        }
+        
+        .dday-sentence {
+            margin-top: 14px;
+            font-size: 0.8rem;
+            color: var(--color-text-light);
+            text-align: center;
+        }
+        
+        .dday-sentence-heart,
+        .dday-sentence-number {
+            color: var(--color-primary);
+            font-weight: 600;
+        }
+        
+        .account-info {
+            margin-top: 20px;
+        }
+        
+        .account-list {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+        
+        .account-group {
+            padding: 20px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .account-group.collapsed {
+            padding: 0;
+        }
+        
+        .groom-group {
+            border-left: 3px solid #4ecdc4;
+            background: linear-gradient(135deg, rgba(78, 205, 196, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+        }
+        
+        .bride-group {
+            border-left: 3px solid #ff6b9d;
+            background: linear-gradient(135deg, rgba(255, 107, 157, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+        }
+        
+        .account-group-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            padding: 15px 20px;
+            margin: -20px -20px 0 -20px;
+            border-radius: 12px 12px 0 0;
+            transition: background 0.3s ease;
+            min-height: 50px;
+        }
+        
+        .account-group.collapsed .account-group-header {
+            margin: 0;
+            border-radius: 12px;
+            padding: 15px 20px;
+        }
+        
+        .account-group-header:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+        
+        .account-group-title {
+            font-size: 0.9rem;
+            color: var(--color-text);
+            font-weight: 600;
+            margin: 0;
+        }
+        
+        .account-group-toggle {
+            font-size: 0.8rem;
+            color: var(--color-text-muted);
+            transition: transform 0.3s ease;
+        }
+        
+        .account-group.collapsed .account-group-toggle {
+            transform: rotate(-90deg);
+        }
+        
+        .account-group-items {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            max-height: 1000px;
+            overflow: hidden;
+            transition: max-height 0.3s ease, opacity 0.3s ease;
+            opacity: 1;
+            margin-top: 15px;
+        }
+        
+        .account-group.collapsed .account-group-items {
+            max-height: 0;
+            opacity: 0;
+            margin-top: 0;
+        }
+        
+        .account-item {
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .account-item:hover {
+            background: rgba(255, 255, 255, 0.06);
+            transform: translateX(3px);
+        }
+        
+        .account-details {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            font-size: 0.8rem;
+        }
+        
+        .account-name-line-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 4px;
+        }
+        
+        .account-copy-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 6px;
+            padding: 8px;
+            cursor: pointer;
+            color: var(--color-text);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+        
+        .account-copy-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: var(--color-accent);
+            color: var(--color-accent);
+            transform: scale(1.1);
+        }
+        
+        .account-copy-btn:active {
+            transform: scale(0.95);
+        }
+        
+        .account-copy-btn svg {
+            width: 14px;
+            height: 14px;
+        }
+        
+        .account-name-line {
+            color: var(--color-text);
+            font-size: 0.85rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .account-relation {
+            font-size: 0.8rem;
+            color: var(--color-text-muted);
+            font-weight: 400;
+        }
+        
+        .account-name-line .account-name {
+            font-size: 0.85rem;
+            color: var(--color-text);
+            font-weight: 500;
+        }
+        
+        .account-bank {
+            color: var(--color-text-muted);
+            font-size: 0.8rem;
+            margin-top: 0;
+        }
+        
+        .account-number {
+            color: var(--color-accent);
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            margin-top: 0;
+        }
+        
+        /* ========================================
+           TOGETHER
+        ======================================== */
+        .together-section { text-align: center; }
+        
+        .together-section .section-header {
+            margin-bottom: 10px;
+        }
+        
+        .together-days {
+            font-family: var(--font-display);
+            font-size: 3rem;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+            margin-top: 0;
+        }
+        
+        .together-text {
+            font-size: 0.9rem;
+            color: var(--color-text-light);
+        }
+        
+        /* ========================================
+           ENDING
+        ======================================== */
+        .ending {
+            text-align: center;
+            padding: 0px 35px 100px 35px;
+            background: var(--color-bg);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .ending-photo {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 0 auto 25px;
+            border: 3px solid var(--color-text);
+        }
+        
+        .ending-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .ending-message {
+            font-family: var(--font-korean);
+            font-size: 1rem;
+            color: var(--color-text-light);
+            line-height: 1.8;
+            margin-bottom: 25px;
+        }
+        
+        .ending-names {
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            color: var(--color-accent);
+            margin-bottom: 35px;
+        }
+        
+        .share-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 35px;
+        }
+        
+        .share-btn {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+        }
+        
+        .share-btn.kakao { background: #fee500; }
+        .share-btn.link { background: var(--color-primary); }
+        .share-btn svg { width: 20px; height: 20px; }
+        
+        .footer-copyright {
+            font-size: 0.6rem;
+            color: var(--color-text-muted);
+        }
+        
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%) translateY(50px);
+            background: var(--color-primary);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 0.75rem;
+            z-index: 10001;
+            opacity: 0;
+        }
+        
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Hero with Ballpit -->
+        <section class="hero">
+            <div id="ballpit-container"></div>
+            
+            <div class="hero-content">
+                <p class="hero-eng-text">our wedding day</p>
+                <div class="hero-photo">
+                    <img src="landing.jpg" alt="정원 & 혜원">
+                </div>
+                <h1 class="hero-names">
+                    이정원 <span style="color: var(--color-primary);">♥</span> 박혜원
+                </h1>
+                <p class="hero-date">2026. 05. 16. Sat. AM 11:00</p>
+            </div>
+            
+            <div class="scroll-hint">
+                SCROLL
+                <svg viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+            </div>
+        </section>
+        
+        <!-- Invitation -->
+        <section class="section galaxy-section invitation">
+            <div class="section-header">
+                <p class="section-eng-title">Invitation</p>
+                <h2 class="section-title">소중한 분들을 초대합니다</h2>
+            </div>
+            <p class="invitation-text">
+                대학 동기로 만나 인연을 맺고<br>
+                이제 부부로서 함께 걸어가고자 합니다.<br>
+                둘이 있을때 가장 나다운 모습을 보여줄 수 있는<br>
+                내 편과 예쁘고 행복하게 잘 살겠습니다.<br><br>
+                봄이 성큼 다가온 날<br>
+                저희 두사람의 설레는 시작을<br>
+                소중한 걸음으로 축복해 주시면 감사하겠습니다.
+            </p>
+            
+            <div class="glass-card">
+                <div class="parents-info">
+                    <div class="parent-side">
+                        <p class="parent-names">이채호 · 심재구의 아들 <span class="child-name">이정원</span></p>
+                    </div>
+                    <div class="parents-divider"></div>
+                    <div class="parent-side">
+                        <p class="parent-names">박상호 · 김형연의 딸 <span class="child-name">박혜원</span></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- About Us -->
+        <section class="section galaxy-section">
+            <div class="section-header">
+                <p class="section-eng-title">About Us</p>
+                <h2 class="section-title">저희를 소개합니다</h2>
+            </div>
+            <div class="glass-card">
+                <div class="about-cards">
+                    <div class="about-card">
+                        <div class="about-photo">
+                            <img src="groom.jpg" alt="신랑 이정원">
+                        </div>
+                        <p class="about-role">신랑</p>
+                        <h3 class="about-name">이정원</h3>
+                        <p class="about-info">#1993년생 #ESTP #IT아키텍트</p>
+                    </div>
+                    
+                    <div class="about-card bride-card">
+                        <div class="about-photo">
+                            <img src="bride.jpg" alt="신부 박혜원">
+                        </div>
+                        <p class="about-role">신부</p>
+                        <h3 class="about-name">박혜원</h3>
+                        <p class="about-info">#1997년생 #ISTP #개발자</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Timeline -->
+        <section class="section galaxy-section">
+            <div class="section-header">
+                <p class="section-eng-title">Our Timeline</p>
+                <h2 class="section-title">우리의 이야기</h2>
+            </div>
+            <div class="glass-card">
+                <div class="timeline-list">
+                    <div class="timeline-item">
+                        <p class="timeline-date">2018년 9월</p>
+                        <h4 class="timeline-title">🎓 원자력법령 수업에서 처음 만남</h4>
+                        <p class="timeline-desc">같은 수업을 듣다가 처음 이야기를 나눈 날</p>
+                    </div>
+                    <div class="timeline-item">
+                        <p class="timeline-date">2022년 5월</p>
+                        <h4 class="timeline-title">💕 연인이 되다</h4>
+                        <p class="timeline-desc">오랜 친구 사이를 지나 서로의 마음을 확인한 날</p>
+                    </div>
+                    <div class="timeline-item">
+                        <p class="timeline-date">연애 기간 4년</p>
+                        <h4 class="timeline-title">🫶 함께 걸어온 시간</h4>
+                        <p class="timeline-desc">오랜 시간 서로를 알아가며 조금씩 닮아온 마음들</p>
+                    </div>
+                    <div class="timeline-item">
+                        <p class="timeline-date">2026년 5월 16일</p>
+                        <h4 class="timeline-title">🤵🏻🤍👰🏻‍♀️</h4>
+                        <p class="timeline-desc">서로의 손을 꼭 잡고 새로운 이야기가 시작될 날</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Interview -->
+        <section class="section galaxy-section">
+            <div class="section-header">
+                <p class="section-eng-title">Interview</p>
+                <h2 class="section-title">우리에게 물었습니다</h2>
+            </div>
+            <div class="interview-list">
+                <div class="glass-card">
+                    <p class="interview-q">Q1. 첫인상은 어땠나요?</p>
+                    <div class="interview-answer">
+                        <p class="interview-who">🤵🏻 신랑</p>
+                        <p class="interview-text">제 이상형입니다.</p>
+                    </div>
+                    <div class="interview-answer bride-answer">
+                        <p class="interview-who">👰🏻‍♀️ 신부</p>
+                        <p class="interview-text">대학교 3학년 수업에서 처음 만났을 때는 진중한 느낌이었는데, 알고 보니 질투 많고 귀여운 사람이었습니다.</p>
+                    </div>
+                </div>
+                
+                <div class="glass-card">
+                    <p class="interview-q">Q2. 결혼을 결심한 계기가 있다면?</p>
+                    <div class="interview-answer">
+                        <p class="interview-who">🤵🏻 신랑</p>
+                        <p class="interview-text">편안함과 설레임의 경계가 없어져서 '이 사람이구나' 싶었죠. 설레는 마음은 여전히 있는데, 옆에 있으면 마음이 너무 편안해서 굳이 포장하지 않아도 되는 사람이더라고요.</p>
+                    </div>
+                    <div class="interview-answer bride-answer">
+                        <p class="interview-who">👰🏻‍♀️ 신부</p>
+                        <p class="interview-text">현재에 안주하지 않고 스스로를 성장시키기 위해 꾸준히 노력하는 모습과, 뭐든 둘 중 한 명만 잘하면 된다며 집안일을 도맡아 주는 마음에 평생을 함께하고 싶다는 확신이 들었습니다😉</p>
+                    </div>
+                </div>
+                
+                <div class="glass-card">
+                    <p class="interview-q">Q3. 신혼여행은 어디로?</p>
+                    <div class="interview-answer">
+                        <p class="interview-text" style="border: none; padding: 0;">12박 13일, 뉴욕과 칸쿤으로 다녀옵니다! 🗽🌴</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Calendar -->
+        <section class="section galaxy-section">
+            <div class="section-header">
+                <p class="section-eng-title">Wedding Day</p>
+                <h2 class="section-title">2026년 5월 16일 토요일 오전 11시<br>강남 아르베 라피네홀</h2>
+            </div>
+            <div class="glass-card calendar-box">
+                <p class="calendar-month">May 2026</p>
+                <div class="calendar-weekdays">
+                    <span>일</span><span>월</span><span>화</span><span>수</span><span>목</span><span>금</span><span>토</span>
+                </div>
+                <div class="calendar-days" id="calendarDays"></div>
+            </div>
+            
+            <div class="glass-card">
+                <div class="dday-counter">
+                    <div>
+                        <span class="dday-value" id="ddayDays">0</span>
+                        <span class="dday-unit">일</span>
+                    </div>
+                    <div>
+                        <span class="dday-value" id="ddayHours">0</span>
+                        <span class="dday-unit">시</span>
+                    </div>
+                    <div>
+                        <span class="dday-value" id="ddayMins">0</span>
+                        <span class="dday-unit">분</span>
+                    </div>
+                    <div>
+                        <span class="dday-value" id="ddaySecs">0</span>
+                        <span class="dday-unit">초</span>
+                    </div>
+                </div>
+                <p class="dday-sentence">
+                    이정원 <span style="color: var(--color-primary);">♥</span> 박혜원의 결혼식이
+                    <span id="ddaySentenceDays" class="dday-sentence-number">0</span>일 남았습니다.
+                </p>
+            </div>
+        
+        </section>
+        
+        <!-- Location -->
+        <section class="section galaxy-section">
+            <div class="section-header">
+                <p class="section-eng-title">Location</p>
+                <h2 class="section-title">오시는 길</h2>
+            </div>
+            <div class="glass-card">
+                <h3 class="location-name">강남 아르베</h3>
+                <p class="location-hall">단독홀(라피네 홀)</p>
+                <p class="location-address">서울특별시 강남구 봉은사로 302</p>
+                <button class="location-copy-btn" onclick="copyAddress()">주소 복사</button>
+                
+                <div class="map-container">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3164.9686593631313!2d127.036841711538!3d37.50865732732806!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca3000cdb4565%3A0x3bf6331e47e5d979!2z7JWE66W067Kg7Juo65Sp!5e0!3m2!1sko!2skr!4v1767338164477!5m2!1sko!2skr" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+                
+                <div class="map-buttons">
+                    <a href="https://map.naver.com/v5/search/강남아르베" target="_blank" class="map-btn" style="background:#03C75A;color:white;">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M16.273 12.845L7.376 3H3v18h4.727V10.155L16.624 21H21V3h-4.727v9.845z" fill="white"/></svg>
+                        네이버지도
+                    </a>
+                    <a href="https://map.kakao.com/link/search/강남아르베" target="_blank" class="map-btn" style="background:#FEE500;color:#191919;">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 3C6.477 3 2 6.477 2 10.5c0 2.47 1.607 4.648 4.023 5.908-.132.486-.85 3.102-.882 3.33 0 0-.017.14.074.194.091.054.198.013.198.013.261-.036 3.018-1.97 3.493-2.305.685.102 1.4.16 2.094.16 5.523 0 10-3.477 10-7.5S17.523 3 12 3z" fill="#191919"/></svg>
+                        카카오맵
+                    </a>
+                </div>
+                
+                <div class="transport-item">
+                    <h4 class="transport-title">🚇 지하철</h4>
+                    <div class="transport-divider"></div>
+                    <p class="transport-detail">9호선(수인분당선) 선정릉역 4번 출구 도보 5분<br>9호선 언주역 5번 출구 도보 5분</p>
+                </div>
+                <div class="transport-item">
+                    <h4 class="transport-title">🚗 주차</h4>
+                    <div class="transport-divider"></div>
+                    <p class="transport-parking-note">외부 주차장 선 주차 후 웨딩홀 이동</p>
+                    <p class="transport-parking-summary">도보 5분 소요 - 2시간 무료 주차</p>
+                    <p class="transport-detail transport-parking-address">
+                        제1주차장: 서울 강남구 논현동 237-12 경복주차장<br>
+                        제2주차장: 서울 강남구 언주로 603 국민은행 논현동지점<br>
+                        제3주차장: 서울 강남구 언주로 609 팍스타워
+                    </p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 마음 전하실 곳 (Account) -->
+        <section class="section galaxy-section">
+            <div class="section-header">
+                <p class="section-eng-title">Account</p>
+                <h2 class="section-title">마음 전하실 곳</h2>
+            </div>
+            
+            <div class="glass-card account-info" id="accountInfo" style="display: block;">
+                <div class="account-list">
+                        <!-- 신랑 그룹 -->
+                        <div class="account-group groom-group collapsed">
+                            <div class="account-group-header" data-group="groom">
+                                <h5 class="account-group-title">신랑 측</h5>
+                                <span class="account-group-toggle">▼</span>
+                            </div>
+                            <div class="account-group-items" id="groomItems">
+                                <div class="account-item">
+                                    <div class="account-details">
+                                        <div class="account-name-line-wrapper">
+                                            <div class="account-name-line">
+                                                <span class="account-relation">신랑</span>
+                                                <span class="account-name">이정원</span>
+                                            </div>
+                                            <button class="account-copy-btn" data-account="***-***-******" title="계좌번호 복사">
+                                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                        <div class="account-bank">신한은행</div>
+                                        <div class="account-number">***-***-******</div>
+                                    </div>
+                                </div>
+                                <div class="account-item">
+                                    <div class="account-details">
+                                        <div class="account-name-line-wrapper">
+                                            <div class="account-name-line">
+                                                <span class="account-relation">신랑 아버지</span>
+                                                <span class="account-name">이채호</span>
+                                            </div>
+                                            <button class="account-copy-btn" data-account="******-**-******" title="계좌번호 복사">
+                                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                        <div class="account-bank">국민은행</div>
+                                        <div class="account-number">******-**-******</div>
+                                    </div>
+                                </div>
+                                <div class="account-item">
+                                    <div class="account-details">
+                                        <div class="account-name-line-wrapper">
+                                            <div class="account-name-line">
+                                                <span class="account-relation">신랑 어머니</span>
+                                                <span class="account-name">심재구</span>
+                                            </div>
+                                            <button class="account-copy-btn" data-account="******-**-******" title="계좌번호 복사">
+                                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                        <div class="account-bank">국민은행</div>
+                                        <div class="account-number">******-**-******</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 신부 그룹 -->
+                        <div class="account-group bride-group collapsed">
+                            <div class="account-group-header" data-group="bride">
+                                <h5 class="account-group-title">신부 측</h5>
+                                <span class="account-group-toggle">▼</span>
+                            </div>
+                            <div class="account-group-items" id="brideItems">
+                                <div class="account-item">
+                                    <div class="account-details">
+                                        <div class="account-name-line-wrapper">
+                                            <div class="account-name-line">
+                                                <span class="account-relation">신부</span>
+                                                <span class="account-name">박혜원</span>
+                                            </div>
+                                            <button class="account-copy-btn" data-account="***-***-******" title="계좌번호 복사">
+                                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                        <div class="account-bank">신한은행</div>
+                                        <div class="account-number">***-***-******</div>
+                                    </div>
+                                </div>
+                                <div class="account-item">
+                                    <div class="account-details">
+                                        <div class="account-name-line-wrapper">
+                                            <div class="account-name-line">
+                                                <span class="account-relation">신부 아버지</span>
+                                                <span class="account-name">박상호</span>
+                                            </div>
+                                            <button class="account-copy-btn" data-account="***-***-******" title="계좌번호 복사">
+                                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                        <div class="account-bank">신한은행</div>
+                                        <div class="account-number">***-***-******</div>
+                                    </div>
+                                </div>
+                                <div class="account-item">
+                                    <div class="account-details">
+                                        <div class="account-name-line-wrapper">
+                                            <div class="account-name-line">
+                                                <span class="account-relation">신부 어머니</span>
+                                                <span class="account-name">김형연</span>
+                                            </div>
+                                            <button class="account-copy-btn" data-account="***-***-******" title="계좌번호 복사">
+                                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                        <div class="account-bank">신한은행</div>
+                                        <div class="account-number">***-***-******</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </section>
+        
+        <!-- Gallery -->
+        <section class="section galaxy-section gallery">
+            <div class="section-header">
+                <p class="section-eng-title">Gallery</p>
+            </div>
+            <div class="gallery-grid" id="galleryGrid">
+                <div class="gallery-column">
+                    <div class="gallery-item" data-index="0">
+                        <img src="gallery/000.jpg" alt="Photo 1" loading="lazy">
+                    </div>
+                    <div class="gallery-item" data-index="1">
+                        <img src="gallery/010.jpg" alt="Photo 2" loading="lazy">
+                    </div>
+                </div>
+                <div class="gallery-column">
+                    <div class="gallery-item" data-index="2">
+                        <img src="gallery/021.jpg" alt="Photo 3" loading="lazy">
+                    </div>
+                    <div class="gallery-item" data-index="3">
+                        <img src="gallery/030.jpg" alt="Photo 4" loading="lazy">
+                    </div>
+                </div>
+                <div class="gallery-column">
+                    <div class="gallery-item" data-index="4">
+                        <img src="gallery/040.jpg" alt="Photo 5" loading="lazy">
+                    </div>
+                    <div class="gallery-item" data-index="5">
+                        <img src="gallery/045.jpg" alt="Photo 6" loading="lazy">
+                    </div>
+                </div>
+                <div class="gallery-column">
+                    <div class="gallery-item" data-index="6">
+                        <img src="gallery/050.jpg" alt="Photo 7" loading="lazy">
+                    </div>
+                    <div class="gallery-item" data-index="7">
+                        <img src="gallery/060.jpg" alt="Photo 8" loading="lazy">
+                    </div>
+                </div>
+                <div class="gallery-column">
+                    <div class="gallery-item" data-index="8">
+                        <img src="gallery/065.jpg" alt="Photo 9" loading="lazy">
+                    </div>
+                    <div class="gallery-item" data-index="9">
+                        <img src="gallery/070.jpg" alt="Photo 10" loading="lazy">
+                    </div>
+                </div>
+                <div class="gallery-column">
+                    <div class="gallery-item" data-index="10">
+                        <img src="gallery/080.jpg" alt="Photo 11" loading="lazy">
+                    </div>
+                    <div class="gallery-item" data-index="11">
+                        <img src="gallery/100.jpg" alt="Photo 12" loading="lazy">
+                    </div>
+                </div>
+                <div class="gallery-column">
+                    <div class="gallery-item" data-index="12">
+                        <img src="gallery/101.jpg" alt="Photo 13" loading="lazy">
+                    </div>
+                    <div class="gallery-item" data-index="13">
+                        <img src="gallery/102.JPG" alt="Photo 14" loading="lazy">
+                    </div>
+                </div>
+                <div class="gallery-column">
+                    <div class="gallery-item" data-index="14">
+                        <img src="gallery/120.jpg" alt="Photo 15" loading="lazy">
+                    </div>
+                    <div class="gallery-item" data-index="15">
+                        <img src="gallery/130.jpg" alt="Photo 16" loading="lazy">
+                    </div>
+                </div>
+                <div class="gallery-column">
+                    <div class="gallery-item" data-index="16">
+                        <img src="gallery/140.jpg" alt="Photo 17" loading="lazy">
+                    </div>
+                    <div class="gallery-item" data-index="17">
+                        <img src="gallery/141.jpg" alt="Photo 18" loading="lazy">
+                    </div>
+                </div>
+                <div class="gallery-column">
+                    <div class="gallery-item" data-index="18">
+                        <img src="gallery/144.jpg" alt="Photo 19" loading="lazy">
+                    </div>
+                    <div class="gallery-item" data-index="19">
+                        <img src="gallery/145.jpg" alt="Photo 20" loading="lazy">
+                    </div>
+                </div>
+                <div class="gallery-column">
+                    <div class="gallery-item" data-index="20">
+                        <img src="gallery/146.jpg" alt="Photo 21" loading="lazy">
+                    </div>
+                    <div class="gallery-item" data-index="21">
+                        <img src="gallery/170.jpg" alt="Photo 22" loading="lazy">
+                    </div>
+                </div>
+                <div class="gallery-column">
+                    <div class="gallery-item" data-index="22">
+                        <img src="gallery/200.jpg" alt="Photo 23" loading="lazy">
+                    </div>
+                    <div class="gallery-item" data-index="23">
+                        <img src="gallery/210.jpg" alt="Photo 24" loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Together -->
+        <section class="section galaxy-section together-section">
+            <div class="section-header">
+                <p class="section-eng-title">D+Day</p>
+                <h2 class="section-title">우리가 함께한 지</h2>
+            </div>
+            <p class="together-days" id="togetherDays">0</p>
+            <p class="together-text">일째 사랑하는 중 💕</p>
+        </section>
+        
+        <!-- Ending -->
+        <section class="galaxy-section ending">
+            <div class="ending-photo">
+                <img src="ending.jpg" alt="정원 & 혜원">
+            </div>
+            <p class="ending-message">
+                저희의 새로운 시작을<br>
+                함께 해주셔서 감사합니다.
+            </p>
+            <p class="ending-names">이정원 <span style="color: var(--color-accent);">♥</span> 박혜원</p>
+            
+            <p class="footer-copyright">©2026 Jeongwon & Hyewon</p>
+        </section>
+    </div>
+    
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" onclick="closeLightbox()">×</button>
+        <button class="lightbox-nav lightbox-prev" onclick="prevImage()">‹</button>
+        <img class="lightbox-content" id="lightboxImg" src="" alt="">
+        <button class="lightbox-nav lightbox-next" onclick="nextImage()">›</button>
+        <div class="lightbox-counter" id="lightboxCounter">1 / 0</div>
+    </div>
+    
+    <!-- Toast -->
+    <div class="toast" id="toast"></div>
+    
+    <!-- Ballpit with Three.js -->
+    <script type="module">
+    import * as THREE from 'three';
+    import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+    
+    // ========================================
+    // BALLPIT - Based on ReactBits source
+    // ========================================
+    
+    try {
+    const ballpitContainer = document.getElementById('ballpit-container');
+    
+    if (!ballpitContainer) {
+        console.warn('Ballpit container not found');
+        throw new Error('Ballpit container not found');
+    }
+    
+    // Config - Optimized for mobile (fewer balls, slower movement)
+    const config = {
+        count: 69,  // 1.1x of 63
+        // Colors: darker purple/blue, white/gray, black
+        colors: [0x3d3480, 0x4547ab, 0x3530a0, 0xffffff, 0xe5e5e5, 0xc0c0c0, 0x2d2d2d, 0x1a1a1a],
+
+        minSize: 0.528,  // 1.1x of 0.48
+        maxSize: 1.32,  // 1.1x of 1.2
+        gravity: 0.28,  // 1.4x gravity
+        friction: 0.995,
+        wallBounce: 0.7,
+        maxVelocity: 0.032,  // Half speed
+        followCursor: false
+    };
+    
+    // Three.js setup
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(50, ballpitContainer.offsetWidth / ballpitContainer.offsetHeight, 0.1, 100);
+    camera.position.set(0, 0, 20);
+    
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setSize(ballpitContainer.offsetWidth, ballpitContainer.offsetHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
+    ballpitContainer.appendChild(renderer.domElement);
+    
+    // Environment
+    const pmremGenerator = new THREE.PMREMGenerator(renderer);
+    const roomEnv = new RoomEnvironment();
+    const envMap = pmremGenerator.fromScene(roomEnv).texture;
+    scene.environment = envMap;
+    
+    // Lights
+    const ambientLight = new THREE.AmbientLight(0xffffff, 1);
+    scene.add(ambientLight);
+    
+    const pointLight = new THREE.PointLight(0x5b4dbe, 150);
+    pointLight.position.set(0, 5, 5);
+    scene.add(pointLight);
+    
+    // Calculate world size (20% wider horizontally)
+    function getWorldSize() {
+        const fov = camera.fov * Math.PI / 180;
+        const height = 2 * Math.tan(fov / 2) * camera.position.z;
+        const width = height * camera.aspect;
+        return { width: width / 2 * 1.2, height: height / 2 };
+    }
+    
+    let worldSize = getWorldSize();
+    
+    // Physics data
+    const positionData = new Float32Array(3 * config.count);
+    const velocityData = new Float32Array(3 * config.count);
+    const sizeData = new Float32Array(config.count);
+    const opacityData = new Array(config.count).fill(1.0); // 1.0 = fully visible, 0 = invisible
+    const isFading = new Array(config.count).fill(false); // Track if ball is fading out
+    const bounceCount = new Array(config.count).fill(0); // Track bounce count
+    const fadeSpeed = 0.012; // How fast balls fade out
+    const originalColors = new Array(config.count); // Store original colors
+    const colorIndices = new Array(config.count); // Store color index for same-color collision
+    const bgColor = new THREE.Color(0x0f0f23); // Background color for fade
+    
+    // Initialize positions and sizes - 35% start inside screen, 65% fall from above (some from far away)
+    for (let i = 0; i < config.count; i++) {
+        const idx = i * 3;
+        positionData[idx] = (Math.random() - 0.5) * worldSize.width * 2; // Random X
+        
+        // 35% of balls start inside screen, 65% start above
+        if (i < config.count * 0.35) {
+            positionData[idx + 1] = (Math.random() - 0.5) * worldSize.height * 2; // Inside screen
+        } else {
+            // Some balls start closer, some start much farther away for longer fall
+            if (i < config.count * 0.65) {
+                // Closer fall (normal)
+                positionData[idx + 1] = worldSize.height + Math.random() * worldSize.height * 2;
+            } else {
+                // Farther fall (longer visible fall)
+                positionData[idx + 1] = worldSize.height + worldSize.height * 2 + Math.random() * worldSize.height * 3;
+            }
+        }
+        
+        positionData[idx + 2] = (Math.random() - 0.5) * 2; // Random Z
+        sizeData[i] = config.minSize + Math.random() * (config.maxSize - config.minSize);
+        // Store original color and color index
+        const colorIndex = Math.floor(Math.random() * config.colors.length); // Random color assignment
+        colorIndices[i] = colorIndex;
+        originalColors[i] = new THREE.Color(config.colors[colorIndex]);
+    }
+    
+    // Create instanced mesh with transparency support
+    const geometry = new THREE.SphereGeometry(1, 32, 32);
+    const material = new THREE.MeshPhysicalMaterial({
+        metalness: 0.5,
+        roughness: 0.5,
+        clearcoat: 1,
+        clearcoatRoughness: 0.15,
+        envMap: envMap,
+        transparent: true,
+        opacity: 1
+    });
+    
+    const spheres = new THREE.InstancedMesh(geometry, material, config.count);
+    scene.add(spheres);
+    
+    // Set initial colors
+    for (let i = 0; i < config.count; i++) {
+        spheres.setColorAt(i, originalColors[i]);
+    }
+    spheres.instanceColor.needsUpdate = true;
+    
+    // Dummy for matrix updates
+    const dummy = new THREE.Object3D();
+    
+    // Function to reset a ball (reuse faded balls)
+    function resetBall(i) {
+        const idx = i * 3;
+        // Reset position - start from above screen
+        positionData[idx] = (Math.random() - 0.5) * worldSize.width * 2; // Random X
+        // Start from various heights above screen
+        if (Math.random() < 0.5) {
+            // Closer fall
+            positionData[idx + 1] = worldSize.height + Math.random() * worldSize.height * 2;
+        } else {
+            // Farther fall (longer visible fall)
+            positionData[idx + 1] = worldSize.height + worldSize.height * 2 + Math.random() * worldSize.height * 3;
+        }
+        positionData[idx + 2] = (Math.random() - 0.5) * 2; // Random Z
+        
+        // Reset velocity
+        velocityData[idx] = 0;
+        velocityData[idx + 1] = 0;
+        velocityData[idx + 2] = 0;
+        
+        // Reset size
+        sizeData[i] = config.minSize + Math.random() * (config.maxSize - config.minSize);
+        
+        // Reset fade state
+        opacityData[i] = 1.0;
+        isFading[i] = false;
+        bounceCount[i] = 0;
+        
+        // Reset color
+        const colorIndex = Math.floor(Math.random() * config.colors.length);
+        colorIndices[i] = colorIndex;
+        originalColors[i] = new THREE.Color(config.colors[colorIndex]);
+        spheres.setColorAt(i, originalColors[i]);
+        spheres.instanceColor.needsUpdate = true;
+    }
+    
+    // Physics update
+    function updatePhysics(delta) {
+        const maxX = worldSize.width;
+        const maxY = worldSize.height;
+        const maxZ = 2;
+        
+        // Apply gravity and friction
+        for (let i = 0; i < config.count; i++) {
+            // If ball is fully faded, reset it
+            if (opacityData[i] <= 0) {
+                resetBall(i);
+                continue;
+            }
+            
+            // Apply fade out effect - blend color towards background
+            if (isFading[i]) {
+                opacityData[i] -= fadeSpeed;
+                if (opacityData[i] < 0) {
+                    opacityData[i] = 0;
+                    // Ball is fully faded, will be reset on next frame
+                    continue;
+                }
+                
+                // Blend original color with background color based on opacity
+                const blendedColor = new THREE.Color();
+                blendedColor.lerpColors(bgColor, originalColors[i], opacityData[i]);
+                spheres.setColorAt(i, blendedColor);
+                spheres.instanceColor.needsUpdate = true;
+            }
+            
+            const idx = i * 3;
+            
+            velocityData[idx + 1] -= delta * config.gravity * sizeData[i];
+            velocityData[idx] *= config.friction;
+            velocityData[idx + 1] *= config.friction;
+            velocityData[idx + 2] *= config.friction;
+            
+            // Clamp velocity
+            const vel = Math.sqrt(velocityData[idx]**2 + velocityData[idx+1]**2 + velocityData[idx+2]**2);
+            if (vel > config.maxVelocity) {
+                const scale = config.maxVelocity / vel;
+                velocityData[idx] *= scale;
+                velocityData[idx + 1] *= scale;
+                velocityData[idx + 2] *= scale;
+            }
+            
+            positionData[idx] += velocityData[idx];
+            positionData[idx + 1] += velocityData[idx + 1];
+            positionData[idx + 2] += velocityData[idx + 2];
+        }
+        
+        // Ball-to-ball collision
+        for (let i = 0; i < config.count; i++) {
+            if (opacityData[i] <= 0) continue; // Skip fully faded balls
+            
+            const iIdx = i * 3;
+            const iRadius = sizeData[i];
+            
+            for (let j = i + 1; j < config.count; j++) {
+                if (opacityData[j] <= 0) continue; // Skip fully faded balls
+                
+                const jIdx = j * 3;
+                const jRadius = sizeData[j];
+                
+                const dx = positionData[jIdx] - positionData[iIdx];
+                const dy = positionData[jIdx + 1] - positionData[iIdx + 1];
+                const dz = positionData[jIdx + 2] - positionData[iIdx + 2];
+                const dist = Math.sqrt(dx*dx + dy*dy + dz*dz);
+                const minDist = iRadius + jRadius;
+                
+                if (dist < minDist && dist > 0) {
+                    const overlap = minDist - dist;
+                    const nx = dx / dist;
+                    const ny = dy / dist;
+                    const nz = dz / dist;
+                    
+                    const separation = overlap * 0.5;
+                    positionData[iIdx] -= nx * separation;
+                    positionData[iIdx + 1] -= ny * separation;
+                    positionData[iIdx + 2] -= nz * separation;
+                    positionData[jIdx] += nx * separation;
+                    positionData[jIdx + 1] += ny * separation;
+                    positionData[jIdx + 2] += nz * separation;
+                    
+                    // Velocity exchange
+                    const impulse = Math.max(
+                        Math.sqrt(velocityData[iIdx]**2 + velocityData[iIdx+1]**2 + velocityData[iIdx+2]**2),
+                        Math.sqrt(velocityData[jIdx]**2 + velocityData[jIdx+1]**2 + velocityData[jIdx+2]**2),
+                        1
+                    );
+                    velocityData[iIdx] -= nx * impulse * 0.3;
+                    velocityData[iIdx + 1] -= ny * impulse * 0.3;
+                    velocityData[jIdx] += nx * impulse * 0.3;
+                    velocityData[jIdx + 1] += ny * impulse * 0.3;
+                }
+            }
+            
+            // Wall collision
+            if (Math.abs(positionData[iIdx]) + iRadius > maxX) {
+                positionData[iIdx] = Math.sign(positionData[iIdx]) * (maxX - iRadius);
+                velocityData[iIdx] *= -config.wallBounce;
+            }
+            // Floor collision - fade out immediately after 1 bounce
+            if (positionData[iIdx + 1] - iRadius < -maxY) {
+                positionData[iIdx + 1] = -maxY + iRadius;
+                velocityData[iIdx + 1] *= -config.wallBounce;
+                
+                // Check if this is the first bounce, then start fading immediately
+                if (bounceCount[i] === 0 && !isFading[i]) {
+                    isFading[i] = true;
+                }
+                bounceCount[i]++;
+            }
+            if (Math.abs(positionData[iIdx + 2]) + iRadius > maxZ) {
+                positionData[iIdx + 2] = Math.sign(positionData[iIdx + 2]) * (maxZ - iRadius);
+                velocityData[iIdx + 2] *= -config.wallBounce;
+            }
+        }
+        
+        // Update mesh matrices
+        for (let i = 0; i < config.count; i++) {
+            const idx = i * 3;
+            dummy.position.set(positionData[idx], positionData[idx + 1], positionData[idx + 2]);
+            // Keep original size, opacity handles fade out via color blending
+            dummy.scale.setScalar(opacityData[i] > 0 ? sizeData[i] : 0);
+            dummy.updateMatrix();
+            spheres.setMatrixAt(i, dummy.matrix);
+        }
+        spheres.instanceMatrix.needsUpdate = true;
+    }
+    
+    // Animation
+    const clock = new THREE.Clock();
+    
+    function animate() {
+        requestAnimationFrame(animate);
+        const delta = clock.getDelta();
+        updatePhysics(delta);
+        renderer.render(scene, camera);
+    }
+    
+    animate();
+    
+    // Resize
+    window.addEventListener('resize', () => {
+        camera.aspect = ballpitContainer.offsetWidth / ballpitContainer.offsetHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(ballpitContainer.offsetWidth, ballpitContainer.offsetHeight);
+        worldSize = getWorldSize();
+    });
+    } catch (error) {
+        console.error('Three.js Ballpit initialization failed:', error);
+        // Gracefully handle error - ballpit will simply not display
+        const ballpitContainer = document.getElementById('ballpit-container');
+        if (ballpitContainer) {
+            ballpitContainer.style.display = 'none';
+        }
+    }
+    </script>
+    
+    <!-- Main App Scripts -->
+    <script>
+    // ========================================
+    // CALENDAR
+    // ========================================
+    function generateCalendar() {
+        const container = document.getElementById('calendarDays');
+        if (!container) return;
+        
+        // 2026년 5월 1일의 요일 (0=일요일, 1=월요일, ..., 6=토요일)
+        const firstDay = new Date(2026, 4, 1).getDay();
+        let html = '';
+        
+        // 빈 칸 추가 (첫 날짜 전까지)
+        for (let i = 0; i < firstDay; i++) {
+            html += '<div class="calendar-day empty"></div>';
+        }
+        
+        // 날짜 추가
+        for (let d = 1; d <= 31; d++) {
+            const currentDate = new Date(2026, 4, d);
+            const dow = currentDate.getDay(); // 실제 요일 계산
+            let cls = 'calendar-day';
+            if (dow === 0) cls += ' sunday';
+            if (d === 16) cls += ' wedding';
+            html += `<div class="${cls}">${d}</div>`;
+        }
+        
+        container.innerHTML = html;
+    }
+    
+    // ========================================
+    // D-DAY COUNTER
+    // ========================================
+    function updateDday() {
+        const daysEl = document.getElementById('ddayDays');
+        const hoursEl = document.getElementById('ddayHours');
+        const minsEl = document.getElementById('ddayMins');
+        const secsEl = document.getElementById('ddaySecs');
+        const sentenceDaysEl = document.getElementById('ddaySentenceDays');
+        
+        if (!daysEl || !hoursEl || !minsEl || !secsEl) {
+            console.warn('D-day counter elements not found');
+            return;
+        }
+        
+        const wedding = new Date('2026-05-16T11:00:00+09:00');
+        const now = new Date();
+        const diff = wedding - now;
+        
+        if (diff > 0) {
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const secs = Math.floor((diff % (1000 * 60)) / 1000);
+            
+            daysEl.textContent = days;
+            hoursEl.textContent = hours;
+            minsEl.textContent = mins;
+            secsEl.textContent = secs;
+            if (sentenceDaysEl) {
+                sentenceDaysEl.textContent = days;
+            }
+        } else {
+            // 결혼식이 지난 경우
+            daysEl.textContent = '0';
+            hoursEl.textContent = '0';
+            minsEl.textContent = '0';
+            secsEl.textContent = '0';
+            if (sentenceDaysEl) {
+                sentenceDaysEl.textContent = '0';
+            }
+        }
+    }
+    
+    // ========================================
+    // COUNT UP ANIMATION
+    // ========================================
+    class CountUp {
+        constructor(element, options = {}) {
+            this.element = element;
+            this.from = options.from || 0;
+            this.to = options.to || 0;
+            this.duration = options.duration || 2;
+            this.delay = options.delay || 0;
+            this.separator = options.separator || ',';
+            this.direction = options.direction || 'up';
+            this.onStart = options.onStart;
+            this.onEnd = options.onEnd;
+            this.animated = false;
+            
+            // Initialize with starting value
+            this.element.textContent = this.formatValue(this.direction === 'down' ? this.to : this.from);
+        }
+        
+        formatValue(value) {
+            // Round to integer and format without decimals
+            const roundedValue = Math.round(value);
+            const options = {
+                useGrouping: !!this.separator,
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0
+            };
+            
+            const formattedNumber = Intl.NumberFormat('en-US', options).format(roundedValue);
+            return this.separator ? formattedNumber.replace(/,/g, this.separator) : formattedNumber;
+        }
+        
+        easeOutExpo(t) {
+            return t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
+        }
+        
+        animate() {
+            if (this.animated) return;
+            this.animated = true;
+            
+            if (this.onStart) this.onStart();
+            
+            const startTime = Date.now() + this.delay * 1000;
+            const startValue = this.direction === 'down' ? this.to : this.from;
+            const endValue = this.direction === 'down' ? this.from : this.to;
+            
+            const animateFrame = () => {
+                const now = Date.now();
+                if (now < startTime) {
+                    requestAnimationFrame(animateFrame);
+                    return;
+                }
+                
+                const elapsed = (now - startTime) / (this.duration * 1000);
+                const progress = Math.min(elapsed, 1);
+                const eased = this.easeOutExpo(progress);
+                
+                const currentValue = startValue + (endValue - startValue) * eased;
+                this.element.textContent = this.formatValue(currentValue);
+                
+                if (progress < 1) {
+                    requestAnimationFrame(animateFrame);
+                } else {
+                    if (this.onEnd) this.onEnd();
+                }
+            };
+            
+            requestAnimationFrame(animateFrame);
+        }
+    }
+    
+    // ========================================
+    // TOGETHER DAYS
+    // ========================================
+    function setupTogetherDays() {
+        const element = document.getElementById('togetherDays');
+        const section = document.querySelector('.together-section');
+        if (!element || !section) return;
+        
+        // 한국 시간대(KST, UTC+9)로 시작일 설정
+        const startDate = new Date('2022-05-21T00:00:00+09:00');
+        const now = new Date();
+        // 시작일을 포함하여 계산 (하루 더 추가)
+        const days = Math.floor((now - startDate) / (1000 * 60 * 60 * 24)) + 1;
+        
+        // Use Intersection Observer to trigger animation when section is in view
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !section.countUpInstance) {
+                    const countUp = new CountUp(element, {
+                        from: 0,
+                        to: days,
+                        duration: 2.5,
+                        separator: ',',
+                        direction: 'up'
+                    });
+                    section.countUpInstance = countUp;
+                    countUp.animate();
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.3 });
+        
+        observer.observe(section);
+    }
+    
+    // ========================================
+    // GALLERY - Dynamic Loading
+    // ========================================
+    let galleryImages = [];
+    let currentImageIndex = 0;
+    
+    // Dynamically generate gallery grid from gallery folder
+    function setupGallery() {
+        const galleryGrid = document.getElementById('galleryGrid');
+        if (!galleryGrid) return;
+        
+        // Hardcoded gallery images in order (ascending by filename)
+        const imagePaths = [
+            'gallery/000.jpg',
+            'gallery/010.jpg',
+            'gallery/021.jpg',
+            'gallery/030.jpg',
+            'gallery/040.jpg',
+            'gallery/045.jpg',
+            'gallery/050.jpg',
+            'gallery/060.jpg',
+            'gallery/065.jpg',
+            'gallery/070.jpg',
+            'gallery/080.jpg',
+            'gallery/100.jpg',
+            'gallery/101.jpg',
+            'gallery/102.JPG',
+            'gallery/120.jpg',
+            'gallery/130.jpg',
+            'gallery/140.jpg',
+            'gallery/141.jpg',
+            'gallery/144.jpg',
+            'gallery/145.jpg',
+            'gallery/146.jpg',
+            'gallery/170.jpg',
+            'gallery/200.jpg',
+            'gallery/210.jpg'
+        ];
+        
+        galleryImages = imagePaths;
+        
+        // Setup click events for existing gallery items
+        const galleryItems = galleryGrid.querySelectorAll('.gallery-item');
+        galleryItems.forEach((item, index) => {
+            item.addEventListener('click', function() {
+                // Add click animation
+                this.classList.add('clicked');
+                setTimeout(() => {
+                    this.classList.remove('clicked');
+                }, 300);
+                
+                // Open lightbox with correct index
+                const clickedIndex = parseInt(this.getAttribute('data-index'), 10);
+                if (!isNaN(clickedIndex)) {
+                    openLightbox(clickedIndex);
+                }
+            });
+        });
+        
+        // Update lightbox counter
+        updateLightboxCounter();
+    }
+    
+    function updateLightboxCounter() {
+        const counter = document.getElementById('lightboxCounter');
+        if (counter) {
+            if (galleryImages.length > 0) {
+                counter.textContent = `1 / ${galleryImages.length}`;
+            } else {
+                counter.textContent = '0 / 0';
+            }
+        }
+    }
+    
+    function openLightbox(idx) {
+        // Validate index
+        if (idx < 0 || idx >= galleryImages.length || galleryImages.length === 0) {
+            console.error('Invalid gallery index:', idx, 'Total images:', galleryImages.length);
+            return;
+        }
+        
+        currentImageIndex = idx;
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightboxImg');
+        const lightboxCounter = document.getElementById('lightboxCounter');
+        
+        if (!lightbox || !lightboxImg || !lightboxCounter) {
+            console.error('Lightbox elements not found');
+            return;
+        }
+        
+        // Set image source
+        lightboxImg.src = galleryImages[idx];
+        lightboxCounter.textContent = `${idx + 1} / ${galleryImages.length}`;
+        
+        // Reset image animation
+        lightboxImg.classList.remove('fade-in', 'fade-out');
+        
+        // Open lightbox with animation
+        lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        
+        // Trigger image animation after a brief delay
+        setTimeout(() => {
+            lightboxImg.classList.add('fade-in');
+        }, 50);
+    }
+    
+    function closeLightbox() {
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightboxImg');
+        
+        // Fade out image
+        lightboxImg.classList.remove('fade-in');
+        lightboxImg.classList.add('fade-out');
+        
+        // Close lightbox after animation
+        setTimeout(() => {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = '';
+            lightboxImg.classList.remove('fade-out');
+        }, 300);
+    }
+    
+    function changeImage(newIndex, direction = 'next') {
+        // Validate index
+        if (galleryImages.length === 0 || newIndex < 0 || newIndex >= galleryImages.length) {
+            return;
+        }
+        
+        const lightboxImg = document.getElementById('lightboxImg');
+        const lightboxCounter = document.getElementById('lightboxCounter');
+        
+        if (!lightboxImg || !lightboxCounter) return;
+        
+        // Fade out current image
+        lightboxImg.classList.remove('fade-in');
+        lightboxImg.classList.add('fade-out');
+        
+        // Change image after fade out
+        setTimeout(() => {
+            currentImageIndex = newIndex;
+            lightboxImg.src = galleryImages[currentImageIndex];
+            
+            // Update counter with animation
+            lightboxCounter.classList.add('updating');
+            lightboxCounter.textContent = `${currentImageIndex + 1} / ${galleryImages.length}`;
+            setTimeout(() => {
+                lightboxCounter.classList.remove('updating');
+            }, 300);
+            
+            // Fade in new image
+            lightboxImg.classList.remove('fade-out');
+            setTimeout(() => {
+                lightboxImg.classList.add('fade-in');
+            }, 50);
+        }, 200);
+    }
+    
+    function prevImage() {
+        if (galleryImages.length === 0) return;
+        const newIndex = (currentImageIndex - 1 + galleryImages.length) % galleryImages.length;
+        changeImage(newIndex, 'prev');
+    }
+    
+    function nextImage() {
+        if (galleryImages.length === 0) return;
+        const newIndex = (currentImageIndex + 1) % galleryImages.length;
+        changeImage(newIndex, 'next');
+    }
+    
+    // Gallery items are now dynamically generated in setupGallery()
+    
+    // Lightbox event listeners with null checks
+    const lightbox = document.getElementById('lightbox');
+    if (lightbox) {
+        lightbox.addEventListener('click', e => {
+            if (e.target.id === 'lightbox') closeLightbox();
+        });
+        
+        // Touch swipe
+        let touchStartX = 0;
+        lightbox.addEventListener('touchstart', e => {
+            if (e.changedTouches && e.changedTouches[0]) {
+                touchStartX = e.changedTouches[0].screenX;
+            }
+        }, { passive: true });
+        
+        lightbox.addEventListener('touchend', e => {
+            if (e.changedTouches && e.changedTouches[0]) {
+                const diff = touchStartX - e.changedTouches[0].screenX;
+                if (Math.abs(diff) > 50) diff > 0 ? nextImage() : prevImage();
+            }
+        }, { passive: true });
+    }
+    
+    document.addEventListener('keydown', e => {
+        const lightboxEl = document.getElementById('lightbox');
+        if (!lightboxEl || !lightboxEl.classList.contains('active')) return;
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowLeft') prevImage();
+        if (e.key === 'ArrowRight') nextImage();
+    });
+    
+    // ========================================
+    // UTILITIES
+    // ========================================
+    function copyAddress() {
+        const text = '서울특별시 강남구 봉은사로 302';
+        copyToClipboard(text, '주소가 복사되었습니다');
+    }
+    
+    function copyLink() {
+        const text = window.location.href;
+        copyToClipboard(text, '링크가 복사되었습니다');
+    }
+    
+    function copyToClipboard(text, successMessage) {
+        // Modern clipboard API (HTTPS or localhost)
+        if (navigator.clipboard && window.isSecureContext) {
+            navigator.clipboard.writeText(text)
+                .then(() => showToast(successMessage))
+                .catch(err => {
+                    console.error('Clipboard API failed:', err);
+                    fallbackCopyToClipboard(text, successMessage);
+                });
+        } else {
+            // Fallback for older browsers or non-secure contexts
+            fallbackCopyToClipboard(text, successMessage);
+        }
+    }
+    
+    function fallbackCopyToClipboard(text, successMessage) {
+        // Create temporary textarea element
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.style.position = 'fixed';
+        textarea.style.left = '-999999px';
+        textarea.style.top = '-999999px';
+        textarea.setAttribute('readonly', '');
+        document.body.appendChild(textarea);
+        
+        try {
+            textarea.focus();
+            textarea.select();
+            const successful = document.execCommand('copy');
+            if (successful) {
+                showToast(successMessage);
+            } else {
+                showToast('복사에 실패했습니다. 수동으로 복사해주세요.');
+            }
+        } catch (err) {
+            console.error('Fallback copy failed:', err);
+            showToast('복사에 실패했습니다. 수동으로 복사해주세요.');
+        } finally {
+            if (document.body.contains(textarea)) {
+                document.body.removeChild(textarea);
+            }
+        }
+    }
+    
+    function showToast(msg) {
+        const toast = document.getElementById('toast');
+        if (!toast) {
+            console.warn('Toast element not found');
+            return;
+        }
+        toast.textContent = msg;
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 2500);
+    }
+    
+    // ========================================
+    // STAR BORDER
+    // ========================================
+    function applyStarBorder(element, options = {}) {
+        if (!element || !element.querySelector) {
+            console.warn('Invalid element provided to applyStarBorder');
+            return;
+        }
+        
+        const color = options.color || 'cyan';
+        const speed = options.speed || '5s';
+        const thickness = options.thickness || 1;
+        
+        // Check if already has star border
+        if (element.querySelector('.border-gradient-bottom')) {
+            return;
+        }
+        
+        // Add star-border-container class
+        element.classList.add('star-border-container');
+        
+        // Create border gradients
+        const borderBottom = document.createElement('div');
+        borderBottom.className = 'border-gradient-bottom';
+        borderBottom.style.background = `radial-gradient(circle, ${color}, transparent 10%)`;
+        borderBottom.style.animationDuration = speed;
+        borderBottom.style.height = `${thickness}px`;
+        
+        const borderTop = document.createElement('div');
+        borderTop.className = 'border-gradient-top';
+        borderTop.style.background = `radial-gradient(circle, ${color}, transparent 10%)`;
+        borderTop.style.animationDuration = speed;
+        borderTop.style.height = `${thickness}px`;
+        
+        // Create inner content wrapper
+        const innerContent = document.createElement('div');
+        innerContent.className = 'inner-content';
+        
+        // Move all children to inner content
+        while (element.firstChild) {
+            innerContent.appendChild(element.firstChild);
+        }
+        
+        // Add borders and content
+        element.appendChild(borderBottom);
+        element.appendChild(borderTop);
+        element.appendChild(innerContent);
+    }
+    
+    function setupStarBorders() {
+        const glassCards = document.querySelectorAll('.glass-card');
+        if (glassCards.length === 0) return;
+        
+        glassCards.forEach(card => {
+            if (card) {
+                applyStarBorder(card, {
+                    color: '#4ecdc4',
+                    speed: '10s',
+                    thickness: 1
+                });
+            }
+        });
+    }
+    
+    // ========================================
+    // HASHTAG STYLING
+    // ========================================
+    function setupHashtags() {
+        const aboutInfoElements = document.querySelectorAll('.about-info');
+        if (aboutInfoElements.length === 0) return;
+        
+        aboutInfoElements.forEach(element => {
+            if (!element) return;
+            
+            const text = element.textContent ? element.textContent.trim() : '';
+            // 해시태그 파싱 (#으로 시작하는 단어들)
+            const hashtags = text.match(/#[^\s#]+/g) || [];
+            
+            if (hashtags.length > 0) {
+                // 기존 텍스트 제거
+                element.textContent = '';
+                
+                // 각 해시태그를 span으로 감싸서 추가
+                hashtags.forEach((tag) => {
+                    if (tag && tag.length > 1) {
+                        const hashtagSpan = document.createElement('span');
+                        hashtagSpan.className = 'hashtag';
+                        hashtagSpan.textContent = tag.substring(1); // # 제거 (CSS에서 추가)
+                        element.appendChild(hashtagSpan);
+                    }
+                });
+            }
+        });
+    }
+    
+    // Initialize
+    // ========================================
+    // ACCOUNT INFO VISIBILITY
+    // ========================================
+    function setupAccountInfo() {
+        const accountInfoEl = document.getElementById('accountInfo');
+        if (!accountInfoEl) return;
+        
+        // URL 쿼리 파라미터에서 account 값 확인
+        const urlParams = new URLSearchParams(window.location.search);
+        const accountParam = urlParams.get('account');
+        
+        // account=false일 때만 숨김, 그 외에는 표시 (기본값: 표시)
+        if (accountParam === 'false') {
+            accountInfoEl.style.display = 'none';
+        } else {
+            accountInfoEl.style.display = 'block';
+        }
+        
+        // 드롭다운 기능 설정
+        const groupHeaders = document.querySelectorAll('.account-group-header');
+        groupHeaders.forEach(header => {
+            if (!header) return;
+            
+            header.addEventListener('click', () => {
+                const group = header.closest('.account-group');
+                if (!group) return;
+                
+                group.classList.toggle('collapsed');
+            });
+        });
+        
+        // 계좌번호 복사 버튼 설정
+        const copyButtons = document.querySelectorAll('.account-copy-btn');
+        copyButtons.forEach(button => {
+            if (!button) return;
+            
+            button.addEventListener('click', (e) => {
+                e.stopPropagation(); // account-item의 이벤트 전파 방지
+                const accountNumber = button.getAttribute('data-account');
+                if (accountNumber) {
+                    copyToClipboard(accountNumber, '계좌번호가 복사되었습니다.');
+                }
+            });
+        });
+    }
+    
+    document.addEventListener('DOMContentLoaded', () => {
+        generateCalendar();
+        updateDday();
+        setupTogetherDays();
+        setupGallery();
+        setupStarBorders();
+        setupHashtags();
+        setupAccountInfo();
+        setInterval(updateDday, 1000);
+    });
+    </script>
+</body>
+</html>
